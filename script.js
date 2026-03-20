@@ -1,36 +1,41 @@
 const form = document.getElementById("form");
-const app = document.querySelector(".app");
-const Tasks = document.createElement("div");
-Tasks.className = "Tasks";
-const ul = document.createElement("ul");
-app.appendChild(Tasks);
-Tasks.appendChild(ul);
+const input = document.getElementById("todoInput");
+const ul = document.getElementById("todoList");
+let data = JSON.parse(localStorage.getItem("todos")) || [];
 
-let Data = JSON.parse(localStorage.getItem("tasks")) || [];
-
-function render() {
-    ul.innerHTML = "";
-    Data.forEach((element, index) => {
-        const li = document.createElement("li");
-        li.textContent = element;
-        ul.appendChild(li);
-        li.addEventListener("click", () => {
-            Data.splice(index, 1);
-            localStorage.setItem("tasks", JSON.stringify(Data));
-            render();
-        });
-    });
-}
-
-render();
+// ✅ Gespeicherte Todos beim Start laden
+data.forEach(text => renderTodo(text));
 
 form.addEventListener("submit", (e) => {
     e.preventDefault();
-    const input = document.getElementById("Task").value;
-    Data.push(input);
-    localStorage.setItem("tasks", JSON.stringify(Data));
-    render();
-    document.getElementById("Task").value = "";
+    const text = input.value;
+    if(text === "") return;
+
+    data.push(text);
+    localStorage.setItem("todos", JSON.stringify(data));
+    renderTodo(text);
+    input.value = ""; // ✅ Input leeren
 });
+
+function renderTodo(text) {
+    const li = document.createElement("li");
+    li.className = "list";
+    li.innerHTML = `
+        <input type="checkbox">
+        ${text}
+        <a href="#" class="deletebtn"> [Löschen] </a>
+    `;
+    ul.appendChild(li);
+
+    li.querySelector(".deletebtn").addEventListener("click", (e) => {
+        e.preventDefault();
+        li.remove();
+        const index = data.indexOf(text);
+        if (index !== -1) {
+            data.splice(index, 1);
+            localStorage.setItem("todos", JSON.stringify(data));
+        }
+    });
+}
 
 

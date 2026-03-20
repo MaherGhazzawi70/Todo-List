@@ -14,67 +14,40 @@ body{
     justify-content: center;
     align-items: center;
 }
-body::selection{
-    background: pink;
-    color: black;
-}
 .app{
-    background: rgba(0, 0, 0, 0.39);
-    width: 550px;
+    background: #fff;
+    width: 400px;
     padding: 30px;
-    color: whitesmoke;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(204, 61, 61, 0.5);
-}
-#form{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-#form label{
-    font-size: 2rem;
-    padding: 20px;
-    font-weight: 600;
-    text-transform: uppercase;
-}
-#Task{
-    width: 70%;
-    height: 30px;
-    text-align: center;
-    background: transparent;
-    border: 2px solid whitesmoke;
     border-radius: 5px;
-    color: whitesmoke;
-    font-weight: 600;
-    font-size: 1.5rem;
-    padding: 20px;
-    outline: none;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.1);
 }
-#btn{
-    margin-top: 40px;
-    height: 50px;
-    width: 150px;
-    font-size: 1.5rem;
-    background: pink;
-    cursor: pointer; 
-}
-.Tasks{
-    text-align: center;
-}
-.Tasks ul{
+li{
     list-style: none;
-    color: pink;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid #eee;
 }
-.Tasks li{
-    margin: 10px;
-    font-size: 2rem;
+input[type="checkbox"]{
+    margin-right: 10px;
+    height: 30px;
+    width: 30px;
     position: relative;
-    cursor: pointer;
-    transition: 0.5s ease;
 }
-.Tasks li:hover{
+input[type="checkbox"]:checked::after{
+    content: "abgeschlossen";
+    position: absolute;
+    bottom: -20px;
+    color: #999;
+    text-transform: uppercase;
     text-decoration: line-through red;
-    color: whitesmoke;
-
+}
+a{
+    color: #000000;
+    text-decoration: none;
+    font-size: 20px;
+}
+a:hover{
+    color: #ff0000;
 }
